@@ -1,0 +1,55 @@
+body {
+	background-color: var(--white);
+	min-height: 100vh;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	max-width: 100%;
+	min-width: 100%;
+}
+
+input {
+	&::-webkit-input-placeholder {
+		opacity: 0.5;
+		transition: opacity 0.3s ease;
+	}
+
+	&::-moz-placeholder {
+		opacity: 0.5;
+		transition: opacity 0.3s ease;
+	}
+
+	&:-moz-placeholder {
+		opacity: 0.5;
+		transition: opacity 0.3s ease;
+	}
+
+	&:-ms-input-placeholder {
+		opacity: 0.5;
+		transition: opacity 0.3s ease;
+	}
+
+	&:focus::-webkit-input-placeholder {
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	&:focus::-moz-placeholder {
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	&:focus:-moz-placeholder {
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	&:focus:-ms-input-placeholder {
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+}

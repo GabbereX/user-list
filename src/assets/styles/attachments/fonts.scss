@@ -1,0 +1,17 @@
+@include addFont(Roboto, Regular, roboto-regular, 400, normal);
+
+html {
+	font-family: 'Roboto', Helvetica, Arial, sans-serif;
+	font-size: var(--font-size-default);
+	line-height: var(--line-height-default);
+	color: var(--black);
+}
+
+button, input {
+	font: inherit;
+}
+
+h2 {
+	font-size: var(--font-size-h2);
+	line-height: var(--line-height-h2);
+}
