@@ -1,6 +1,7 @@
 .label {
 	display: flex;
 	flex-direction: column;
+	position: relative;
 	margin-bottom: 16px;
 
 	&:last-of-type {
@@ -14,15 +15,34 @@
 
 .input {
 	padding: 12px 8px 12px 16px;
-	background-color: var(--light-gray);
+	background-color: var(--gray-100);
 
 	font-size: var(--font-size-input);
 	line-height: var(--line-height-input);
 
-	border: none;
+	border: 1px solid transparent;
 	border-radius: 8px;
+
+	transition: border-color 0.3s ease;
 
 	&:focus {
 		outline: none;
+		border-color: var(--black);
+	}
+}
+
+.hide_password_button {
+	position: absolute;
+	right: 10px;
+	bottom: 8px;
+	line-height: 0;
+
+	& svg path {
+		stroke: var(--gray-300);
+		transition: stroke 0.3s ease;
+	}
+
+	&:hover svg path {
+		stroke: var(--violet);
 	}
 }

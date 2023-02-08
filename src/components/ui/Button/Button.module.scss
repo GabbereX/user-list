@@ -1,0 +1,19 @@
+.button {
+	border-radius: 8px;
+	color: var(--white);
+	transition: opacity 0.3s ease;
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.violet {
+	padding: 13px;
+	width: 100%;
+	background-color: var(--violet);
+}
+
+.white {
+	border: 1px solid var(--white);
+}
