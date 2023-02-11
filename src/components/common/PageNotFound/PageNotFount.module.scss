@@ -1,0 +1,17 @@
+.root {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 100vh;
+
+	& span {
+		margin-bottom: 16px;
+	}
+}
+
+.button {
+	padding: 4px 10px 6px;
+	width: auto;
+	font-size: 14px;
+}

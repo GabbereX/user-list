@@ -7,15 +7,16 @@ import { HideShowPasswordIcon } from '@components/ui/icons/HideShowPasswordIcon'
 import { Register } from '@components/modules/auth/auth.consts'
 
 import styles from './Input.module.scss'
+import { TAuthData } from '@components/modules/auth/auth.types'
 
 interface IProps {
 	options: IAuthInput
-	useForm: UseFormReturn<Record<Register, string>>
+	useForm: UseFormReturn<TAuthData>
 }
 
 export const Input: FC<IProps> = ({ options, useForm }) => {
-	const { name, label, type, placeholder } = options
-	const { register, setFocus, watch } = useForm
+	const { name, label, type, placeholder, validate } = options
+	const { register, setFocus, watch, formState: { errors } } = useForm
 
 	const [ isHidePassword, setIsHidePassword ] = useState<boolean>(true)
 
@@ -32,8 +33,6 @@ export const Input: FC<IProps> = ({ options, useForm }) => {
 		await setIsHidePassword(!isHidePassword)
 
 		setFocus(name)
-
-		console.log(watch(Register.REPEAT_PASSWORD))
 	}
 
 	return (
@@ -47,13 +46,22 @@ export const Input: FC<IProps> = ({ options, useForm }) => {
 				placeholder={ placeholder }
 				{ ...register(name, {
 					required: 'Поле обязательно к заполнению',
-					minLength: {
-						value: 5,
-						message: 'Минимум 5 символов'
-					},
-					pattern: '/[A-Za-z]{3}/'
+					...validate,
+					validate: (value: string) => {
+						if (
+							name === Register.REPEAT_PASSWORD
+							&& value !== watch(Register.PASSWORD)
+						) return 'Пароли не совпадают'
+					}
 				}) }
+				style={ { borderColor: errors[name]?.message && 'var(--red)' } }
 			/>
+			{
+				errors[name] &&
+				<span className={ styles.error }>
+					{ errors[name]?.message || 'Ошибка' }
+				</span>
+			}
 			{
 				isPassword &&
 				<button

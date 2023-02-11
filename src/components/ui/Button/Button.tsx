@@ -7,17 +7,25 @@ interface IProps {
 	children: string
 	theme?: ButtonTheme
 	classes?: string
-
+	onClick?: () => void
 }
 
-export const Button: FC<IProps> = ({ children, classes, theme = ButtonTheme.WHITE }) => {
+export const Button: FC<IProps> = ({
+	children,
+	classes,
+	theme = ButtonTheme.WHITE,
+	onClick
+}) => {
 	const className = `
     ${ styles.button } ${ classes }
     ${ theme === ButtonTheme.WHITE ? styles.white : styles.violet }
   `
 
 	return (
-		<button className={ className }>
+		<button
+			onClick={ onClick }
+			className={ className }
+		>
 			{ children }
 		</button>
 	)

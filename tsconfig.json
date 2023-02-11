@@ -20,6 +20,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "src",
+    "noImplicitAny": false,
     "paths": {
       "@components/*": [
         "components/*"

@@ -13,5 +13,24 @@
 		& > h2 {
 			margin-bottom: 16px;
 		}
+
+		& form {
+			margin-bottom: 16px;
+		}
+	}
+}
+
+.link {
+	display: inline-block;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	color: var(--violet);
+	font-size: var(--font-size-link);
+	line-height: var(--line-height-link);
+	transition: color 0.3s ease;
+
+	&:hover {
+		color: var(--black)
 	}
 }

@@ -46,3 +46,12 @@
 		stroke: var(--violet);
 	}
 }
+
+.error {
+	position: absolute;
+	left: 0;
+	bottom: -22px;
+	color: var(--red);
+	font-size: var(--font-size-error);
+	line-height: var(--line-height-error);
+}
