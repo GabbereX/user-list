@@ -4,7 +4,7 @@ import { UseFormReturn } from 'react-hook-form'
 import { IAuthInput, TInputType } from '@components/ui/Input/Input.types'
 
 import { HideShowPasswordIcon } from '@components/ui/icons/HideShowPasswordIcon'
-import { Register } from '@components/modules/auth/auth.consts'
+import { RegisterFields } from '@components/modules/auth/auth.consts'
 
 import styles from './Input.module.scss'
 import { TAuthData } from '@components/modules/auth/auth.types'
@@ -49,8 +49,8 @@ export const Input: FC<IProps> = ({ options, useForm }) => {
 					...validate,
 					validate: (value: string) => {
 						if (
-							name === Register.REPEAT_PASSWORD
-							&& value !== watch(Register.PASSWORD)
+							name === RegisterFields.REPEAT_PASSWORD
+							&& value !== watch(RegisterFields.PASSWORD)
 						) return 'Пароли не совпадают'
 					}
 				}) }

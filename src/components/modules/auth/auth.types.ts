@@ -1,3 +1,3 @@
-import { Login, Register } from '@components/modules/auth/auth.consts'
+import { LoginFields, RegisterFields } from '@components/modules/auth/auth.consts'
 
-export type TAuthData = Record<Register | Login, string>
+export type TAuthData = Record<RegisterFields | LoginFields, string>

@@ -1,18 +1,27 @@
-import { FC, Fragment, ReactNode } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { FC, Fragment, ReactNode, useEffect } from 'react'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import { Auth } from '@components/modules/auth/Auth'
-import { AuthPath } from '@components/modules/auth/auth.consts'
-import { getCookie } from '../../../utils/cookie.utils'
 import { PageNotFound } from '@components/common/PageNotFound'
+import { PathsRoute } from '@consts/paths.consts'
+import { useAppSelector } from '@hooks/redux'
+import { authState } from '@store/slices/authStore/authSlice'
 
 export const Startup: FC = () => {
-	const token = getCookie('token')
+	const navigate = useNavigate()
+
+	const { isAuthorized } = useAppSelector(authState)
+
+	useEffect(() => {
+		navigate(
+			isAuthorized ? PathsRoute.USERS : PathsRoute.LOGIN
+		)
+	}, [ isAuthorized ])
 
 	const getPagesAuthRole = (): ReactNode => (
 		<Fragment>
 			<Route
-				path={ AuthPath.REGISTER }
-				element={ <Auth path={ AuthPath.REGISTER } /> }
+				path={ PathsRoute.REGISTER }
+				element={ <Auth path={ PathsRoute.REGISTER } /> }
 			/>
 		</Fragment>
 	)
@@ -20,12 +29,12 @@ export const Startup: FC = () => {
 	const getPagesNotAuthRole = (): ReactNode => (
 		<Fragment>
 			<Route
-				path={ AuthPath.REGISTER }
-				element={ <Auth path={ AuthPath.REGISTER } /> }
+				path={ PathsRoute.REGISTER }
+				element={ <Auth path={ PathsRoute.REGISTER } /> }
 			/>
 			<Route
-				path={ AuthPath.LOGIN }
-				element={ <Auth path={ AuthPath.LOGIN } /> }
+				path={ PathsRoute.LOGIN }
+				element={ <Auth path={ PathsRoute.LOGIN } /> }
 			/>
 		</Fragment>
 	)
@@ -33,14 +42,14 @@ export const Startup: FC = () => {
 	return (
 		<Routes>
 			{
-				token
+				isAuthorized
 					? getPagesAuthRole()
 					: getPagesNotAuthRole()
 			}
 
 			<Route
 				path='*'
-				element={ <PageNotFound token={ token } /> }
+				element={ <PageNotFound isAuthorized={ isAuthorized } /> }
 			/>
 
 

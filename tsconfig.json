@@ -27,6 +27,18 @@
       ],
       "@styles/*": [
         "assets/styles/*"
+      ],
+      "@service/*": [
+        "service/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
+      "@store/*": [
+        "store/*"
+      ],
+      "@consts/*": [
+        "consts/*"
       ]
     }
   },

@@ -4,16 +4,16 @@ import styles from './PageNotFount.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@components/ui/Button'
 import { ButtonTheme } from '@components/ui/Button/Button.consts'
-import { AuthPath } from '@components/modules/auth/auth.consts'
+import { PathsRoute } from '@consts/paths.consts'
 
 interface IProps {
-	token?: string
+	isAuthorized: boolean
 }
 
-export const PageNotFound: FC<IProps> = ({ token }) => {
+export const PageNotFound: FC<IProps> = ({ isAuthorized }) => {
 	const navigate = useNavigate()
-	const backButtonPath = token ? '/users' : AuthPath.LOGIN
-	const backButtonText = token
+	const backButtonPath = isAuthorized ? '/users' : PathsRoute.LOGIN
+	const backButtonText = isAuthorized
 		? 'Перейти в список пользователей'
 		: 'Перейти к авторизации'
 

@@ -34,3 +34,11 @@
 		color: var(--black)
 	}
 }
+
+.error {
+	margin-bottom: 16px;
+	text-align: center;
+	color: var(--red);
+	font-size: var(--font-size-error);
+	line-height: var(--line-height-error);
+}

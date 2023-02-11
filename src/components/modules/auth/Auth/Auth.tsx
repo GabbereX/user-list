@@ -3,29 +3,29 @@ import { FC } from 'react'
 import styles from '../auth.module.scss'
 
 import { AuthForm } from '../AuthForm'
-import { AuthPath } from '@components/modules/auth/auth.consts'
 import { Link } from 'react-router-dom'
+import { PathsRoute } from '@consts/paths.consts'
 
 interface IProps {
-	path: AuthPath
+	path: PathsRoute
 }
 
 export const Auth: FC<IProps> = ({ path }) => {
-	const isLogin = path === AuthPath.LOGIN
+	const isLogin = path === PathsRoute.LOGIN
 
 	return (
 		<div className={ styles.root }>
 			<div className={ styles.root_form }>
 				<h2>
 					{
-						path === AuthPath.LOGIN
+						path === PathsRoute.LOGIN
 							? 'Авторизация'
 							: 'Регистрация'
 					}
 				</h2>
 				<AuthForm isLogin={ isLogin } />
 				<Link
-					to={ isLogin ? AuthPath.REGISTER : AuthPath.LOGIN }
+					to={ isLogin ? PathsRoute.REGISTER : PathsRoute.LOGIN }
 					className={ styles.link }
 				>
 					{
