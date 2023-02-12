@@ -1,14 +1,16 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { authSlice, getTokenThunk } from './slices'
-import { authActions } from '@store/slices/authStore/authSlice'
+import { authActions, authSlice, getTokenThunk, getUsersThunk, userActions, userSlice } from './attachments'
 
 export const actionsRoot = {
 	getTokenThunk,
-	...authActions
+	getUsersThunk,
+	...authActions,
+	...userActions
 }
 
 export const reducers = {
-	authSlice
+	authSlice,
+	userSlice
 }
 
 const rootReducer = combineReducers(reducers)

@@ -1,0 +1,28 @@
+.head {
+	padding: 32px 80px;
+	color: var(--white);
+	background-color: var(--violet);
+
+	& h1 {
+		margin: 0 0 16px 0;
+		font-size: var(--font-size-h1);
+		line-height: var(--line-height-h1);
+	}
+
+	& p {
+		font-size: var(--font-size-p);
+		line-height: var(--line-height-p);
+	}
+
+	&_content {
+		margin: 0 auto;
+		max-width: 846px;
+		text-align: center;
+
+	}
+}
+
+.exit_button {
+	display: block;
+	margin-left: auto;
+}

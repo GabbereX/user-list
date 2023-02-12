@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { IToken, ITokenThunkParameters } from './authStore.types'
 import axios from 'axios'
+import { errorResponse } from '@consts/errors.consts'
 
 const getTokenThunk = createAsyncThunk(
 	'post/getTokenThunk',
@@ -14,7 +15,7 @@ const getTokenThunk = createAsyncThunk(
 
 			return response.data.token
 		} catch (err) {
-			return rejectWithValue('Что-то пошло не так, попробуйте позже...')
+			return rejectWithValue(errorResponse)
 		}
 	}
 )

@@ -1,10 +1,12 @@
 import { FC } from 'react'
-
-import styles from './PageNotFount.module.scss'
 import { useNavigate } from 'react-router-dom'
+
 import { Button } from '@components/ui/Button'
+
 import { ButtonTheme } from '@components/ui/Button/Button.consts'
 import { PathsRoute } from '@consts/paths.consts'
+
+import styles from './PageNotFount.module.scss'
 
 interface IProps {
 	isAuthorized: boolean

@@ -16,7 +16,7 @@ import { ButtonTheme } from '@components/ui/Button/Button.consts'
 import { pathsAPI } from '@consts/paths.consts'
 
 import { useAppDispatch, useAppSelector } from '@hooks/redux'
-import { authState } from '@store/slices/authStore/authSlice'
+import { authState } from '@store/attachments/authStore/authStore.slice'
 import { TAuthData } from '@components/modules/auth/auth.types'
 
 import styles from '../auth.module.scss'

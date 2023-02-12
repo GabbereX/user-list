@@ -1,13 +1,15 @@
 import { FC, useState } from 'react'
 
 import { UseFormReturn } from 'react-hook-form'
-import { IAuthInput, TInputType } from '@components/ui/Input/Input.types'
 
 import { HideShowPasswordIcon } from '@components/ui/icons/HideShowPasswordIcon'
+
 import { RegisterFields } from '@components/modules/auth/auth.consts'
 
-import styles from './Input.module.scss'
+import { IAuthInput, TInputType } from '@components/ui/Input/Input.types'
 import { TAuthData } from '@components/modules/auth/auth.types'
+
+import styles from './Input.module.scss'
 
 interface IProps {
 	options: IAuthInput

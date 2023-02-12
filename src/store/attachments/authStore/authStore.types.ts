@@ -14,6 +14,6 @@ export type IToken = {
 
 export interface IAuthStoreInitialState {
 	isAuthorized: boolean
-	isLoading: boolean
+	isAuthLoading: boolean
 	authError: string
 }

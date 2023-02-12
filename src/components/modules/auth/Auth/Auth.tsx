@@ -1,10 +1,11 @@
 import { FC } from 'react'
-
-import styles from '../auth.module.scss'
+import { Link } from 'react-router-dom'
 
 import { AuthForm } from '../AuthForm'
-import { Link } from 'react-router-dom'
+
 import { PathsRoute } from '@consts/paths.consts'
+
+import styles from '../auth.module.scss'
 
 interface IProps {
 	path: PathsRoute
