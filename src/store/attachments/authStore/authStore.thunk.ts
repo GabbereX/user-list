@@ -3,7 +3,7 @@ import { IToken, ITokenThunkParameters } from './authStore.types'
 import axios from 'axios'
 import { errorResponse } from '@consts/errors.consts'
 
-const getTokenThunk = createAsyncThunk(
+export const getTokenThunk = createAsyncThunk(
 	'post/getTokenThunk',
 	async({ path, data }: ITokenThunkParameters, { rejectWithValue }) => {
 		try {
@@ -20,4 +20,3 @@ const getTokenThunk = createAsyncThunk(
 	}
 )
 
-export default getTokenThunk

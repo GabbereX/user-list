@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '@store/store'
-import getTokenThunk from './authStore.thunk'
 import { getCookie, setCookie } from '../../../utils/cookie.utils'
 import { Cookies } from '@consts/storage.consts'
-import { IAuthStoreInitialState } from '@store/attachments/authStore/authStore.types'
+import { IAuthStoreInitialState } from './authStore.types'
+import { getTokenThunk } from './authStore.thunk'
 
 const initialState: IAuthStoreInitialState = {
 	isAuthorized: !!getCookie(Cookies.TOKEN),
@@ -18,7 +18,7 @@ const authStoreSlice = createSlice({
 		setAuthError(state, action: PayloadAction<string>) {
 			state.authError = action.payload
 		},
-		setIsAuthorizet(state, action: PayloadAction<boolean>) {
+		setIsAuthorized(state, action: PayloadAction<boolean>) {
 			state.isAuthorized = action.payload
 		}
 	},

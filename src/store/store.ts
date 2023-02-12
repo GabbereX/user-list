@@ -1,5 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { authActions, authSlice, getTokenThunk, getUsersThunk, userActions, userSlice } from './attachments'
+import { authActions, authSlice, userActions, userSlice } from './attachments'
+import { getTokenThunk } from './attachments/authStore/authStore.thunk'
+import { getUsersThunk } from './attachments/userStore/userStore.thunk'
 
 export const actionsRoot = {
 	getTokenThunk,

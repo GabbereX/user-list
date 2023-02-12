@@ -11,11 +11,11 @@ interface IProps {
 }
 
 export const UserHead: FC<IProps> = ({ children }) => {
-	const { setIsAuthorizet } = useAppDispatch()
+	const { setIsAuthorized } = useAppDispatch()
 
 	const handleClick = (): void => {
 		deleteCookie(Cookies.TOKEN)
-		setIsAuthorizet(false)
+		setIsAuthorized(false)
 	}
 
 	return (

@@ -1,6 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '@store/store'
-import { IUserStoreInitialState } from '@store/attachments/userStore/userStore.types'
+import { IUsersData, IUserStoreInitialState } from './userStore.types'
+import { getUsersThunk } from './userStore.thunk'
 
 const initialState: IUserStoreInitialState = {
 	page: 1,
@@ -21,7 +22,20 @@ const userStoreSlice = createSlice({
 	name: 'userSlice',
 	initialState,
 	reducers: {},
-	extraReducers: {}
+	extraReducers: {
+		[getUsersThunk.pending.type]: state => {
+			state.userList.isUserListLoading = true
+		},
+		[getUsersThunk.fulfilled.type]: (state, action: PayloadAction<IUsersData>) => {
+			state.userList.userListData = action.payload.data
+			state.userList.isUserListLoading = false
+			state.userList.userListError = ''
+		},
+		[getUsersThunk.rejected.type]: (state, action: PayloadAction<string>) => {
+			state.userList.isUserListLoading = false
+			state.userList.userListError = action.payload
+		}
+	}
 })
 
 export const userActions = userStoreSlice.actions
