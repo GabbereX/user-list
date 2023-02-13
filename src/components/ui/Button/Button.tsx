@@ -8,13 +8,15 @@ interface IProps {
 	theme?: ButtonTheme
 	classes?: string
 	onClick?: () => void
+	disabled?: boolean
 }
 
 export const Button: FC<IProps> = ({
 	children,
 	classes,
 	theme = ButtonTheme.WHITE,
-	onClick
+	onClick,
+	disabled
 }) => {
 	const className = `
     ${ styles.button } ${ classes }
@@ -23,6 +25,7 @@ export const Button: FC<IProps> = ({
 
 	return (
 		<button
+			disabled={ disabled }
 			onClick={ onClick }
 			className={ className }
 		>

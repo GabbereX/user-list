@@ -24,10 +24,12 @@ export const UserItem: FC<IProps> = ({
     ${ storageLikes[id] && styles.item_like_active }
   `
 
-	const handleClick = (): void => {
-		console.log(storageLikes)
-		setStorageLikes({ ...storageLikes, [id]: !storageLikes[id] ?? true })
-	}
+	const handleClick = (): void => (
+		setStorageLikes({
+			...storageLikes,
+			[id]: !storageLikes[id] ?? true
+		})
+	)
 
 	return (
 		<li className={ styles.item }>

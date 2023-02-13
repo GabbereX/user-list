@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC, Fragment, useEffect } from 'react'
 import { UserHead } from '../UserHead'
 import { headDescription } from '../user.consts'
 
@@ -8,21 +8,30 @@ import { userState } from '@store/attachments/userStore/userStore.slice'
 import { UserItem } from '@components/modules/user/UserItem'
 import useLocalStorage from '@hooks/useLocalStorage'
 import { LocalStorage } from '@consts/storage.consts'
+import { useSearchParams } from 'react-router-dom'
+import { UserPagination } from '@components/modules/user/UserPagination'
 
 export const UserList: FC = () => {
-	const [ storageLikes, setStorageLikes ] = useLocalStorage({}, LocalStorage.LIKES)
-	const { getUsersThunk } = useAppDispatch()
+	const [ storageLikes, setStorageLikes ] =
+		useLocalStorage({}, LocalStorage.LIKES)
+
+	const [ searchParams ] = useSearchParams()
+	const { getUsersThunk, setPage } = useAppDispatch()
+
 	const { userList } = useAppSelector(userState)
 	const { userListData } = userList
 
 	useEffect(() => {
+		const page = searchParams.get('page') ?? 1
+
 		const params = {
-			page: 1,
+			page: +page,
 			per_page: 8
 		}
 
+		setPage(+page)
 		getUsersThunk(params)
-	}, [])
+	}, [ searchParams ])
 
 	return (
 		<div>
@@ -32,24 +41,23 @@ export const UserList: FC = () => {
 					<p>{ headDescription }</p>
 				</div>
 			</UserHead>
-
 			{
 				userListData.length &&
-				<ul
-					className={ styles.list }
-				>
-					{
-						userListData.map(user => (
-							<UserItem
-								key={ user.id }
-								storageLikes={ storageLikes }
-								setStorageLikes={ setStorageLikes }
-								{ ...user }
-							/>))
-					}
-				</ul>
+				<Fragment>
+					<ul className={ styles.list }>
+						{
+							userListData.map(user => (
+								<UserItem
+									key={ user.id }
+									storageLikes={ storageLikes }
+									setStorageLikes={ setStorageLikes }
+									{ ...user }
+								/>))
+						}
+					</ul>
+					<UserPagination />
+				</Fragment>
 			}
-
 		</div>
 	)
 }

@@ -21,12 +21,18 @@ const initialState: IUserStoreInitialState = {
 const userStoreSlice = createSlice({
 	name: 'userSlice',
 	initialState,
-	reducers: {},
+	reducers: {
+		setPage(state, action: PayloadAction<number>) {
+			state.page = action.payload
+		}
+	},
 	extraReducers: {
 		[getUsersThunk.pending.type]: state => {
 			state.userList.isUserListLoading = true
 		},
 		[getUsersThunk.fulfilled.type]: (state, action: PayloadAction<IUsersData>) => {
+			state.total_pages = action.payload.total_pages
+
 			state.userList.userListData = action.payload.data
 			state.userList.isUserListLoading = false
 			state.userList.userListError = ''

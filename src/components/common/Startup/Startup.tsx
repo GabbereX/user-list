@@ -1,5 +1,5 @@
 import { FC, Fragment, ReactNode, useEffect } from 'react'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 import { Auth } from '@components/modules/auth/Auth'
 import { PageNotFound } from '@components/common/PageNotFound'
@@ -14,13 +14,14 @@ import { UserList } from '@components/modules/user/UserList'
 
 export const Startup: FC = () => {
 	const { isAuthLoading } = useAppSelector(authState)
+	const { search } = useLocation()
 	const navigate = useNavigate()
 
 	const { isAuthorized } = useAppSelector(authState)
 
 	useEffect(() => {
 		navigate(
-			isAuthorized ? PathsRoute.USERS : PathsRoute.LOGIN
+			isAuthorized ? PathsRoute.USERS + search : PathsRoute.LOGIN
 		)
 	}, [ isAuthorized ])
 

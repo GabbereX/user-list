@@ -31,7 +31,7 @@
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	gap: 20px;
-	padding: 48px 80px 56px;
+	padding: 48px 80px;
 }
 
 .item {
@@ -96,6 +96,25 @@
 		width: 47%;
 		min-width: 124px;
 		border-radius: 100%;
+	}
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 48px;
+
+	& > button {
+		width: 30px;
+		height: 30px;
+		padding: 4px;
+		border-radius: 4px;
+		font-size: var(--font-size-default);
+		line-height: var(--line-height-default);
+
+		&:not(:last-child) {
+			margin-right: 10px;
+		}
 	}
 }
 
