@@ -11,7 +11,9 @@ export const UserPagination: FC = () => {
 	const { total_pages, page } = useAppSelector(userState)
 
 	const handleClick = (index: number): void => {
-		setSearchParams({ 'page': `${ index + 1 }` })
+		const pageNumber = index + 1
+
+		setSearchParams({ 'page': `${ pageNumber }` })
 	}
 
 	return (

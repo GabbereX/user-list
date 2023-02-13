@@ -12,6 +12,7 @@ import { useAppSelector } from '@hooks/redux'
 import { Spinner } from '@components/common/Spinner'
 import { UserList } from '@components/modules/user/UserList'
 import { userState } from '@store/attachments/userStore/userStore.slice'
+import { UserCurrent } from '@components/modules/user/UserCurrent'
 
 export const Startup: FC = () => {
 	const { isAuthLoading } = useAppSelector(authState)
@@ -24,6 +25,7 @@ export const Startup: FC = () => {
 	const { isAuthorized } = useAppSelector(authState)
 
 	useEffect(() => {
+		console.log(isAuthorized)
 		navigate(
 			isAuthorized ? PathsRoute.USERS + search : PathsRoute.LOGIN
 		)
@@ -34,6 +36,10 @@ export const Startup: FC = () => {
 			<Route
 				path={ PathsRoute.USERS }
 				element={ <UserList /> }
+			/>
+			<Route
+				path={ PathsRoute.USER + ':id' }
+				element={ <UserCurrent /> }
 			/>
 		</Fragment>
 	)

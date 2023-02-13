@@ -17,7 +17,7 @@ export const UserList: FC = () => {
 	const [ storageLikes, setStorageLikes ] =
 		useLocalStorage({}, LocalStorage.LIKES)
 
-	const [ searchParams ] = useSearchParams()
+	// const [ searchParams ] = useSearchParams()
 	const { getUsersThunk, setPage } = useAppDispatch()
 
 	const { userList } = useAppSelector(userState)
@@ -26,12 +26,12 @@ export const UserList: FC = () => {
 	useEffect(() => {
 		if (firstEnty) {
 			(async() => {
-				const page = searchParams.get('page') ?? 1
+				// const page = searchParams.get('page') ?? 1
 
-				const params = {
-					page: +page,
-					per_page: 8
-				}
+				// const params = {
+				// 	page: +page,
+				// 	per_page: 8
+				// }
 
 				setPage(+page)
 				await getUsersThunk(params)
@@ -40,6 +40,10 @@ export const UserList: FC = () => {
 				pagination?.scrollIntoView()
 			})()
 		} else firstEnty = true
+
+		// return () => {
+		// 	firstEnty = false
+		// }
 	}, [ searchParams ])
 
 	return (

@@ -2,6 +2,8 @@ import { FC } from 'react'
 import { HeartIcon } from '@components/ui/icons/HeartIcon'
 import { IUser } from '@store/attachments/userStore/userStore.types'
 import styles from '..//user.module.scss'
+import { useNavigate } from 'react-router-dom'
+import { PathsRoute } from '@consts/paths.consts'
 
 type TLikes = Record<number, boolean>
 
@@ -18,6 +20,7 @@ export const UserItem: FC<IProps> = ({
 	storageLikes,
 	setStorageLikes
 }) => {
+	const navigate = useNavigate()
 
 	const likeClasses = `
     ${ styles.item_like }
@@ -32,7 +35,10 @@ export const UserItem: FC<IProps> = ({
 	)
 
 	return (
-		<li className={ styles.item }>
+		<li
+			className={ styles.item }
+			onClick={ () => navigate(PathsRoute.USER + id) }
+		>
 			<div className={ styles.item_content }>
 				<img
 					src={ avatar }
