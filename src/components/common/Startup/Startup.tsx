@@ -61,7 +61,9 @@ export const Startup: FC = () => {
 
 				<Route
 					path='*'
-					element={ <PageNotFound isAuthorized={ isAuthorized } /> }
+					element={
+						<PageNotFound isAuthorized={ isAuthorized } />
+					}
 				/>
 
 
