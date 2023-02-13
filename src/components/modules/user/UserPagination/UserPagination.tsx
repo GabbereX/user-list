@@ -12,11 +12,12 @@ export const UserPagination: FC = () => {
 
 	const handleClick = (index: number): void => {
 		setSearchParams({ 'page': `${ index + 1 }` })
-		window.scrollTo({ top: 0 })
 	}
 
 	return (
-		<div className={ styles.pagination }>
+		<div
+			className={ styles.pagination }
+			id='userPagination'>
 			{
 				Array(total_pages).fill(null).map((_, index) =>
 					<Button

@@ -19,7 +19,7 @@ export const Button: FC<IProps> = ({
 	disabled
 }) => {
 	const className = `
-    ${ styles.button } ${ classes }
+    ${ styles.button } ${ classes ?? '' }
     ${ theme === ButtonTheme.WHITE ? styles.white : styles.violet }
   `
 

@@ -11,9 +11,13 @@ import { authState } from '@store/attachments/authStore/authStore.slice'
 import { useAppSelector } from '@hooks/redux'
 import { Spinner } from '@components/common/Spinner'
 import { UserList } from '@components/modules/user/UserList'
+import { userState } from '@store/attachments/userStore/userStore.slice'
 
 export const Startup: FC = () => {
 	const { isAuthLoading } = useAppSelector(authState)
+	const { userList: { isUserListLoading } } =
+		useAppSelector(userState)
+
 	const { search } = useLocation()
 	const navigate = useNavigate()
 
@@ -50,7 +54,8 @@ export const Startup: FC = () => {
 	return (
 		<Fragment>
 			{
-				isAuthLoading && <Spinner />
+				(isAuthLoading || isUserListLoading) &&
+				<Spinner />
 			}
 
 			<Routes>

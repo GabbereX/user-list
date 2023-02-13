@@ -11,6 +11,8 @@ import { LocalStorage } from '@consts/storage.consts'
 import { useSearchParams } from 'react-router-dom'
 import { UserPagination } from '@components/modules/user/UserPagination'
 
+let firstEnty: boolean = false
+
 export const UserList: FC = () => {
 	const [ storageLikes, setStorageLikes ] =
 		useLocalStorage({}, LocalStorage.LIKES)
@@ -22,15 +24,22 @@ export const UserList: FC = () => {
 	const { userListData } = userList
 
 	useEffect(() => {
-		const page = searchParams.get('page') ?? 1
+		if (firstEnty) {
+			(async() => {
+				const page = searchParams.get('page') ?? 1
 
-		const params = {
-			page: +page,
-			per_page: 8
-		}
+				const params = {
+					page: +page,
+					per_page: 8
+				}
 
-		setPage(+page)
-		getUsersThunk(params)
+				setPage(+page)
+				await getUsersThunk(params)
+
+				const pagination = window.document.getElementById('userPagination')
+				pagination?.scrollIntoView()
+			})()
+		} else firstEnty = true
 	}, [ searchParams ])
 
 	return (
