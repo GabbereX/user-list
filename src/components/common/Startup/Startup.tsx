@@ -33,16 +33,12 @@ export const Startup: FC = () => {
 		|| isUserCurrentLoading
 
 	useEffect(() => {
-		console.log(isAuthorized)
-
 		const isAuthPath =
 			[ PathsRoute.LOGIN, PathsRoute.REGISTER ]
 				.includes(pathname as PathsRoute)
 
 		if (isAuthPath && isAuthorized) {
 			navigate(PathsRoute.USERS + search)
-		} else if (!isAuthorized) {
-			navigate(PathsRoute.LOGIN)
 		}
 	}, [ isAuthorized ])
 
@@ -90,9 +86,7 @@ export const Startup: FC = () => {
 
 				<Route
 					path='*'
-					element={
-						<PageNotFound isAuthorized={ isAuthorized } />
-					}
+					element={ <PageNotFound /> }
 				/>
 			</Routes>
 		</Fragment>

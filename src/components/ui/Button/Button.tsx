@@ -9,6 +9,7 @@ interface IProps {
 	classes?: string
 	onClick?: () => void
 	disabled?: boolean
+	isSmallButton?: boolean
 }
 
 export const Button: FC<IProps> = ({
@@ -16,11 +17,13 @@ export const Button: FC<IProps> = ({
 	classes,
 	theme = ButtonTheme.WHITE,
 	onClick,
-	disabled
+	disabled,
+	isSmallButton
 }) => {
 	const className = `
-    ${ styles.button } ${ classes ?? '' }
+    ${ styles.button } ${ classes ?? '' } 
     ${ theme === ButtonTheme.WHITE ? styles.white : styles.violet }
+    ${ isSmallButton ? styles.small : '' }
   `
 
 	return (

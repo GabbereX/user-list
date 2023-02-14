@@ -10,8 +10,11 @@
 	}
 }
 
-.button {
-	padding: 4px 10px 6px;
-	width: auto;
-	font-size: 14px;
+.buttons_group {
+	display: flex;
+	flex-direction: column;
+
+	& button {
+		margin-bottom: 16px;
+	}
 }

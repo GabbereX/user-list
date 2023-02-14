@@ -1,4 +1,4 @@
-import { FC, Fragment, useEffect } from 'react'
+import { FC, Fragment, ReactNode, useEffect } from 'react'
 import { UserHead } from '../UserHead'
 import { headDescription } from '../user.consts'
 
@@ -11,6 +11,9 @@ import { LocalStorage } from '@consts/storage.consts'
 import { UserPagination } from '../UserPagination'
 import useParamsProject from '@hooks/useParamsProject'
 import { useLocation } from 'react-router-dom'
+import { emptyList, errorResponse } from '@consts/errors.consts'
+import { ButtonTheme } from '@components/ui/Button/Button.consts'
+import { Button } from '@components/ui/Button'
 
 export const UserList: FC = () => {
 	const [ storageLikes, setStorageLikes ] =
@@ -24,7 +27,28 @@ export const UserList: FC = () => {
 	const { getUsersThunk } = useAppDispatch()
 
 	const { userList } = useAppSelector(userState)
-	const { userListData } = userList
+	const {
+		userListData,
+		userListError,
+		isUserListLoading
+	} = userList
+
+	const renderError = (): ReactNode => (
+		userListError
+			? (
+				<div>
+					<p>{ errorResponse }</p>
+					<Button
+						theme={ ButtonTheme.VIOLET }
+						onClick={ () => getUsersThunk(params) }
+						isSmallButton
+					>
+						Загрузить список еще раз
+					</Button>
+				</div>
+			)
+			: isUserListLoading ? '' : emptyList
+	)
 
 	let ignoreRequest = false
 
@@ -41,7 +65,7 @@ export const UserList: FC = () => {
 	}, [ pathname, search ])
 
 	return (
-		<div>
+		<Fragment>
 			<UserHead>
 				<div className={ styles.head_content }>
 					<h1>Наша Команда</h1>
@@ -49,22 +73,28 @@ export const UserList: FC = () => {
 				</div>
 			</UserHead>
 			{
-				userListData.length &&
-				<Fragment>
-					<ul className={ styles.list }>
-						{
-							userListData.map(user => (
-								<UserItem
-									key={ user.id }
-									storageLikes={ storageLikes }
-									setStorageLikes={ setStorageLikes }
-									{ ...user }
-								/>))
-						}
-					</ul>
-					<UserPagination />
-				</Fragment>
+				userListData.length
+					? (
+						<Fragment>
+							<ul className={ styles.list }>
+								{
+									userListData.map(user => (
+										<UserItem
+											key={ user.id }
+											storageLikes={ storageLikes }
+											setStorageLikes={ setStorageLikes }
+											{ ...user }
+										/>))
+								}
+							</ul>
+							<UserPagination />
+						</Fragment>)
+					: (
+						<div className={ styles.list_missing }>
+							{ renderError() }
+						</div>
+					)
 			}
-		</div>
+		</Fragment>
 	)
 }

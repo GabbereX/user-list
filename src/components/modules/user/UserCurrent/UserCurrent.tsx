@@ -7,13 +7,19 @@ import { userState } from '@store/attachments/userStore/userStore.slice'
 import { TelephoneIcon } from '@components/ui/icons/TelephoneIcon'
 import { MailIcon } from '@components/ui/icons/MailIcon'
 import { generatePhoneNumber } from '@utils/common.utils'
+import { PageNotFound } from '@components/common/PageNotFound'
 
 export const UserCurrent: FC = () => {
 
 	const { id } = useParams()
 	const { getUserCurrentThunk, clearUserCurrent } = useAppDispatch()
-	const { userCurrent: { userCurrentData } } =
-		useAppSelector(userState)
+	const {
+		userCurrent: {
+			userCurrentData,
+			userCurrentError,
+			isUserCurrentLoading
+		}
+	} = useAppSelector(userState)
 
 	let ignoreRequest = false
 
@@ -26,7 +32,19 @@ export const UserCurrent: FC = () => {
 		}
 	}, [])
 
-	if (!userCurrentData) return null
+	if (!userCurrentData) {
+		if (!isUserCurrentLoading) {
+			return (
+				(userCurrentError === '404')
+					? <PageNotFound isUserCurrentNotFound />
+					: <PageNotFound
+						errorMessage={ userCurrentError }
+						onClick={ getUserCurrentThunk }
+						id={ id }
+					/>
+			)
+		} else return null
+	}
 
 	const {
 		email,

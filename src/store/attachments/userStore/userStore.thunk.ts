@@ -26,8 +26,12 @@ export const getUserCurrentThunk = createAsyncThunk(
 				await axios.get<IUserCurrentData>(pathsAPI.user + id)
 
 			return response.data
-		} catch (err) {
-			return rejectWithValue(errorResponse)
+		} catch (err: any) {
+			return rejectWithValue(
+				err?.response?.status === 404
+					? '404'
+					: errorResponse
+			)
 		}
 	}
 )

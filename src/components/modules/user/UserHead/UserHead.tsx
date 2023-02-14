@@ -26,6 +26,7 @@ export const UserHead: FC<IProps> = ({ children }) => {
 	const handleClickToExit = (): void => {
 		deleteCookie(Cookies.TOKEN)
 		setIsAuthorized(false)
+		navigate(PathsRoute.LOGIN)
 	}
 
 	const handleClickToBack = (): void => {

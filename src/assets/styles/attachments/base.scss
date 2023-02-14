@@ -1,6 +1,5 @@
 body {
 	background-color: var(--white);
-	min-height: 100vh;
 	overflow-x: hidden;
 }
 
@@ -73,4 +72,10 @@ li {
 ul, li {
 	margin: 0;
 	padding: 0;
+}
+
+#root {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
