@@ -1,25 +1,37 @@
-import { FC } from 'react'
+import { FC, useRef } from 'react'
 import { Button } from '@components/ui/Button'
 import { ButtonTheme } from '@components/ui/Button/Button.consts'
 import styles from '../user.module.scss'
 import { useSearchParams } from 'react-router-dom'
-import { useAppSelector } from '@hooks/redux'
+import { useAppDispatch, useAppSelector } from '@hooks/redux'
 import { userState } from '@store/attachments/userStore/userStore.slice'
+import useParams from '@hooks/useParams'
+import { Nullable } from '../../../../types/global.types'
 
 export const UserPagination: FC = () => {
 	const [ _, setSearchParams ] = useSearchParams()
+	const { getUsersThunk } = useAppDispatch()
+
+	const params = useParams()
+
+	const paginationRef = useRef<Nullable<HTMLDivElement>>(null)
+
 	const { total_pages, page } = useAppSelector(userState)
 
-	const handleClick = (index: number): void => {
-		const pageNumber = index + 1
+	const handleClick = async(index: number): Promise<void> => {
+		const page = index + 1
 
-		setSearchParams({ 'page': `${ pageNumber }` })
+		await setSearchParams({ 'page': `${ page }` })
+		await getUsersThunk({ ...params, page })
+
+		paginationRef.current?.scrollIntoView()
 	}
 
 	return (
 		<div
+			ref={ paginationRef }
 			className={ styles.pagination }
-			id='userPagination'>
+		>
 			{
 				Array(total_pages).fill(null).map((_, index) =>
 					<Button

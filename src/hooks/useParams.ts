@@ -4,19 +4,25 @@ import { IUsersDataParams } from '@store/attachments/userStore/userStore.types'
 import { useAppDispatch } from '@hooks/redux'
 
 const useParams = () => {
-	const {setPage} = useAppDispatch()
+	const { setPage } = useAppDispatch()
 	const [ searchParams ] = useSearchParams()
 
-	const page = searchParams.get('page') ?? 1
+	const getPage = (): number => {
+		const page = searchParams.get('page') ?? 1
 
-	const [ params, setParams ] = useState<IUsersDataParams>({
-		page: +page,
+		return +page
+	}
+
+	const [ params ] = useState<IUsersDataParams>({
+		page: getPage(),
 		per_page: 8
 	})
 
 	useEffect(() => {
+		setPage(getPage())
+	}, [ searchParams ])
 
-	}, [searchParams])
+	return params
 }
 
 export default useParams

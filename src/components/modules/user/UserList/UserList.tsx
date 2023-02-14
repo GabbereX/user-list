@@ -8,43 +8,28 @@ import { userState } from '@store/attachments/userStore/userStore.slice'
 import { UserItem } from '@components/modules/user/UserItem'
 import useLocalStorage from '@hooks/useLocalStorage'
 import { LocalStorage } from '@consts/storage.consts'
-import { useSearchParams } from 'react-router-dom'
-import { UserPagination } from '@components/modules/user/UserPagination'
-
-let firstEnty: boolean = false
+import { UserPagination } from '../UserPagination'
+import useParams from '@hooks/useParams'
 
 export const UserList: FC = () => {
 	const [ storageLikes, setStorageLikes ] =
 		useLocalStorage({}, LocalStorage.LIKES)
+	const params = useParams()
 
-	// const [ searchParams ] = useSearchParams()
-	const { getUsersThunk, setPage } = useAppDispatch()
+	const { getUsersThunk } = useAppDispatch()
 
 	const { userList } = useAppSelector(userState)
 	const { userListData } = userList
 
+	let ignoreRequest = false
+
 	useEffect(() => {
-		if (firstEnty) {
-			(async() => {
-				// const page = searchParams.get('page') ?? 1
+		!ignoreRequest && getUsersThunk(params)
 
-				// const params = {
-				// 	page: +page,
-				// 	per_page: 8
-				// }
-
-				setPage(+page)
-				await getUsersThunk(params)
-
-				const pagination = window.document.getElementById('userPagination')
-				pagination?.scrollIntoView()
-			})()
-		} else firstEnty = true
-
-		// return () => {
-		// 	firstEnty = false
-		// }
-	}, [ searchParams ])
+		return () => {
+			ignoreRequest = true
+		}
+	}, [])
 
 	return (
 		<div>

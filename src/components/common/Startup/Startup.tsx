@@ -19,16 +19,21 @@ export const Startup: FC = () => {
 	const { userList: { isUserListLoading } } =
 		useAppSelector(userState)
 
-	const { search } = useLocation()
+	const { pathname, search } = useLocation()
 	const navigate = useNavigate()
 
 	const { isAuthorized } = useAppSelector(authState)
 
 	useEffect(() => {
-		console.log(isAuthorized)
-		navigate(
-			isAuthorized ? PathsRoute.USERS + search : PathsRoute.LOGIN
-		)
+		const isAuthPath =
+			[ PathsRoute.LOGIN, PathsRoute.REGISTER ]
+				.includes(pathname as PathsRoute)
+
+		if (isAuthPath && isAuthorized) {
+			navigate(PathsRoute.USERS + search)
+		} else if (!isAuthorized) {
+			navigate(PathsRoute.LOGIN)
+		}
 	}, [ isAuthorized ])
 
 	const getPagesAuthRole = (): ReactNode => (
