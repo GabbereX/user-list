@@ -1,10 +1,10 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 
 import styles from './Button.module.scss'
 import { ButtonTheme } from '@components/ui/Button/Button.consts'
 
 interface IProps {
-	children: string
+	children: ReactNode
 	theme?: ButtonTheme
 	classes?: string
 	onClick?: () => void

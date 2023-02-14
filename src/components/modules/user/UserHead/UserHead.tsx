@@ -28,8 +28,7 @@ export const UserHead: FC<IProps> = ({ children }) => {
 		setIsAuthorized(false)
 	}
 
-	const handleClickToBack = () => {
-		console.log(lastUserListPath.length)
+	const handleClickToBack = (): void => {
 		lastUserListPath
 			? navigate(-1)
 			: navigate(PathsRoute.USERS)
@@ -43,14 +42,14 @@ export const UserHead: FC<IProps> = ({ children }) => {
 					<Button
 						onClick={ handleClickToBack }
 					>
-						Назад
+						<span>Назад</span>
 					</Button>
 				}
 				<Button
 					classes={ styles.exit_button }
 					onClick={ handleClickToExit }
 				>
-					Выход
+					<span>Выход</span>
 				</Button>
 			</div>
 			{ children }

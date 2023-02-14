@@ -18,13 +18,23 @@ import { LocalStorage } from '@consts/storage.consts'
 export const Startup: FC = () => {
 	const { isAuthLoading } = useAppSelector(authState)
 	const { isAuthorized } = useAppSelector(authState)
-	const { userList: { isUserListLoading } } =
+	const {
+		userList: { isUserListLoading },
+		userCurrent: { isUserCurrentLoading }
+	} =
 		useAppSelector(userState)
 
 	const { pathname, search } = useLocation()
 	const navigate = useNavigate()
 
+	const isLoading =
+		isAuthLoading
+		|| isUserListLoading
+		|| isUserCurrentLoading
+
 	useEffect(() => {
+		console.log(isAuthorized)
+
 		const isAuthPath =
 			[ PathsRoute.LOGIN, PathsRoute.REGISTER ]
 				.includes(pathname as PathsRoute)
@@ -70,11 +80,7 @@ export const Startup: FC = () => {
 
 	return (
 		<Fragment>
-			{
-				(isAuthLoading || isUserListLoading) &&
-				<Spinner />
-			}
-
+			{ isLoading && <Spinner /> }
 			<Routes>
 				{
 					isAuthorized
