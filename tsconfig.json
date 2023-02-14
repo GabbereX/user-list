@@ -39,6 +39,9 @@
       ],
       "@consts/*": [
         "consts/*"
+      ],
+      "@utils/*": [
+        "utils/*"
       ]
     }
   },

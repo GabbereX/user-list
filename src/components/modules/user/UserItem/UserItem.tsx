@@ -27,7 +27,7 @@ export const UserItem: FC<IProps> = ({
     ${ storageLikes[id] && styles.item_like_active }
   `
 
-	const handleClick = (): void => (
+	const handleClickToLike = (): void => (
 		setStorageLikes({
 			...storageLikes,
 			[id]: !storageLikes[id] ?? true
@@ -49,7 +49,7 @@ export const UserItem: FC<IProps> = ({
 				</span>
 				<button
 					className={ likeClasses }
-					onClick={ handleClick }
+					onClick={ handleClickToLike }
 				>
 					<HeartIcon />
 				</button>

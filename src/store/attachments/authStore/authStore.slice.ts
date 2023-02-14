@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '@store/store'
-import { getCookie, setCookie } from '../../../utils/cookie.utils'
+import { getCookie, setCookie } from '@utils/cookie.utils'
 import { Cookies } from '@consts/storage.consts'
 import { IAuthStoreInitialState } from './authStore.types'
 import { getTokenThunk } from './authStore.thunk'

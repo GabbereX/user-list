@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { IUsersDataParams } from '@store/attachments/userStore/userStore.types'
 import { useAppDispatch } from '@hooks/redux'
 
-const useParams = () => {
+const useParamsProject = () => {
 	const { setPage } = useAppDispatch()
 	const [ searchParams ] = useSearchParams()
 
@@ -25,4 +25,4 @@ const useParams = () => {
 	return params
 }
 
-export default useParams
+export default useParamsProject

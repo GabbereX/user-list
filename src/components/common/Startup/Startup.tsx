@@ -13,16 +13,16 @@ import { Spinner } from '@components/common/Spinner'
 import { UserList } from '@components/modules/user/UserList'
 import { userState } from '@store/attachments/userStore/userStore.slice'
 import { UserCurrent } from '@components/modules/user/UserCurrent'
+import { LocalStorage } from '@consts/storage.consts'
 
 export const Startup: FC = () => {
 	const { isAuthLoading } = useAppSelector(authState)
+	const { isAuthorized } = useAppSelector(authState)
 	const { userList: { isUserListLoading } } =
 		useAppSelector(userState)
 
 	const { pathname, search } = useLocation()
 	const navigate = useNavigate()
-
-	const { isAuthorized } = useAppSelector(authState)
 
 	useEffect(() => {
 		const isAuthPath =
@@ -35,6 +35,12 @@ export const Startup: FC = () => {
 			navigate(PathsRoute.LOGIN)
 		}
 	}, [ isAuthorized ])
+
+	useEffect(() => {
+		return () => {
+			localStorage.removeItem(LocalStorage.LAST_USERLIST_PATH)
+		}
+	}, [])
 
 	const getPagesAuthRole = (): ReactNode => (
 		<Fragment>
@@ -82,17 +88,6 @@ export const Startup: FC = () => {
 						<PageNotFound isAuthorized={ isAuthorized } />
 					}
 				/>
-
-
-				{/*{*/ }
-				{/*	[ '/login', 'register' ].map(path =>*/ }
-				{/*		<Route*/ }
-				{/*			key={ path }*/ }
-				{/*			path={ path }*/ }
-				{/*			element={ <Auth /> }*/ }
-				{/*		/>*/ }
-				{/*	)*/ }
-				{/*}*/ }
 			</Routes>
 		</Fragment>
 	)

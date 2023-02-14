@@ -5,14 +5,14 @@ import styles from '../user.module.scss'
 import { useSearchParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@hooks/redux'
 import { userState } from '@store/attachments/userStore/userStore.slice'
-import useParams from '@hooks/useParams'
+import useParamsProject from '@hooks/useParamsProject'
 import { Nullable } from '../../../../types/global.types'
 
 export const UserPagination: FC = () => {
 	const [ _, setSearchParams ] = useSearchParams()
 	const { getUsersThunk } = useAppDispatch()
 
-	const params = useParams()
+	const params = useParamsProject()
 
 	const paginationRef = useRef<Nullable<HTMLDivElement>>(null)
 

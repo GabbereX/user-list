@@ -5,7 +5,7 @@ export const pathsAPI = (() => {
 		register: '/register',
 		login: '/login',
 		users: '/users',
-		user: '/users/{{ id }}'
+		user: '/users/'
 	}
 
 	for (const key in paths) {

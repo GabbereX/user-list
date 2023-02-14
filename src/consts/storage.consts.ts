@@ -3,5 +3,6 @@ export const enum Cookies {
 }
 
 export const enum LocalStorage {
-	LIKES = 'likes'
+	LIKES = 'likes',
+	LAST_USERLIST_PATH = 'last_userlist_path'
 }

@@ -3,6 +3,10 @@
 	color: var(--white);
 	background-color: var(--violet);
 
+	&_container {
+		display: flex;
+	}
+
 	& h1 {
 		margin: 0 0 16px 0;
 		font-size: var(--font-size-h1);
@@ -10,8 +14,8 @@
 	}
 
 	& p {
-		font-size: var(--font-size-big);
-		line-height: var(--line-height-big);
+		font-size: var(--font-size-middle);
+		line-height: var(--line-height-middle);
 	}
 
 	&_content {
@@ -19,6 +23,28 @@
 		max-width: 846px;
 		text-align: center;
 
+		&_user {
+			display: flex;
+			position: relative;
+			margin: 0 auto 68px 110px;
+			text-align: initial;
+
+			& div {
+				padding-left: calc(187px + 32px);
+			}
+
+			& img {
+				position: absolute;
+				top: -20%;
+				width: 187px;
+				border-radius: 100%;
+			}
+
+			& p {
+				font-size: var(--font-size-big);
+				line-height: var(--line-height-big);
+			}
+		}
 	}
 }
 
@@ -50,8 +76,8 @@
 		padding: 20px;
 		width: 100%;
 		height: 100%;
-		font-size: var(--font-size-big);
-		line-height: var(--line-height-big);
+		font-size: var(--font-size-middle);
+		line-height: var(--line-height-middle);
 		overflow: hidden;
 		transform: translate(-50%, -50%);
 	}
@@ -96,6 +122,39 @@
 		width: 47%;
 		min-width: 124px;
 		border-radius: 100%;
+	}
+}
+
+.current_user {
+	display: flex;
+	padding: 48px 80px;
+
+	& p {
+		margin-right: 130px;
+		width: calc(50% - 10px);
+	}
+
+	&_contacts {
+		& svg {
+			margin-right: 10px;
+		}
+
+		& div {
+			display: flex;
+			align-items: center;
+
+			&:not(:last-child) {
+				margin-bottom: 30px;
+			}
+		}
+
+		& a {
+			transition: color 0.3s ease;
+
+			&:hover {
+				color: var(--violet);
+			}
+		}
 	}
 }
 

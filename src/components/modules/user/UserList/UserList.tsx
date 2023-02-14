@@ -9,12 +9,17 @@ import { UserItem } from '@components/modules/user/UserItem'
 import useLocalStorage from '@hooks/useLocalStorage'
 import { LocalStorage } from '@consts/storage.consts'
 import { UserPagination } from '../UserPagination'
-import useParams from '@hooks/useParams'
+import useParamsProject from '@hooks/useParamsProject'
+import { useLocation } from 'react-router-dom'
 
 export const UserList: FC = () => {
 	const [ storageLikes, setStorageLikes ] =
 		useLocalStorage({}, LocalStorage.LIKES)
-	const params = useParams()
+	const [ _, setLastUserListPath ] =
+		useLocalStorage('', LocalStorage.LAST_USERLIST_PATH)
+	const params = useParamsProject()
+
+	const { pathname, search } = useLocation()
 
 	const { getUsersThunk } = useAppDispatch()
 
@@ -30,6 +35,10 @@ export const UserList: FC = () => {
 			ignoreRequest = true
 		}
 	}, [])
+
+	useEffect(() => {
+		setLastUserListPath(pathname + search)
+	}, [ pathname, search ])
 
 	return (
 		<div>

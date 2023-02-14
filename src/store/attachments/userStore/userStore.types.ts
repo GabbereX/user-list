@@ -8,6 +8,14 @@ export interface IUsersData {
 	data: Array<IUser>
 }
 
+export interface IUserCurrentData {
+	data: IUser
+	support: {
+		url: string
+		text: string
+	}
+}
+
 export interface IUser {
 	id: number
 	email: string
@@ -32,6 +40,8 @@ export interface IUserStoreInitialState {
 	userCurrent: {
 		isUserCurrentLoading: boolean
 		userCurrentError: string
-		userCurrentData: Nullable<IUser>
+		userCurrentData: Nullable<IUser & {
+			text: string
+		}>
 	}
 }
