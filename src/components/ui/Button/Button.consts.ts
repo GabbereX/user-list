@@ -1,4 +1,5 @@
 export const enum ButtonTheme {
 	VIOLET = 'violet',
-	WHITE = 'white'
+	WHITE = 'white',
+	ICON = 'icon'
 }

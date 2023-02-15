@@ -20,9 +20,20 @@ export const Button: FC<IProps> = ({
 	disabled,
 	isSmallButton
 }) => {
+	const getButtonThemeClass = (): string => {
+		switch (theme) {
+			case ButtonTheme.VIOLET:
+				return styles.violet
+			case ButtonTheme.ICON:
+				return styles.icon
+		}
+
+		return styles.white
+	}
+
 	const className = `
     ${ styles.button } ${ classes ?? '' } 
-    ${ theme === ButtonTheme.WHITE ? styles.white : styles.violet }
+    ${ getButtonThemeClass() }
     ${ isSmallButton ? styles.small : '' }
   `
 

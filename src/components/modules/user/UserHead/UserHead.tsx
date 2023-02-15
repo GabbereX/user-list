@@ -8,12 +8,17 @@ import { useAppDispatch } from '@hooks/redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { PathsRoute } from '@consts/paths.consts'
 import useLocalStorage from '@hooks/useLocalStorage'
+import useResizeWidth from '@hooks/useResizeWidth'
+import { BackButtonIcon } from '@components/ui/icons/BackButtonIcon'
+import { ExitButtonIcon } from '@components/ui/icons/ExitButtonIcon'
+import { ButtonTheme } from '@components/ui/Button/Button.consts'
 
 interface IProps {
 	children: ReactNode
 }
 
 export const UserHead: FC<IProps> = ({ children }) => {
+	const matchesSize = useResizeWidth(1024)
 	const navigate = useNavigate()
 	const { pathname } = useLocation()
 	const { setIsAuthorized } = useAppDispatch()
@@ -41,16 +46,26 @@ export const UserHead: FC<IProps> = ({ children }) => {
 				{
 					isUserCurrentPage &&
 					<Button
+						theme={ matchesSize ? ButtonTheme.ICON : ButtonTheme.WHITE }
 						onClick={ handleClickToBack }
 					>
-						<span>Назад</span>
+						{
+							matchesSize
+								? <BackButtonIcon />
+								: 'Назад'
+						}
 					</Button>
 				}
 				<Button
+					theme={ matchesSize ? ButtonTheme.ICON : ButtonTheme.WHITE }
 					classes={ styles.exit_button }
 					onClick={ handleClickToExit }
 				>
-					<span>Выход</span>
+					{
+						matchesSize
+							? <ExitButtonIcon />
+							: 'Выход'
+					}
 				</Button>
 			</div>
 			{ children }

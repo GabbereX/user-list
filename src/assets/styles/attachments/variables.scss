@@ -32,3 +32,16 @@
 	--font-size-link: 10px;
 	--line-height-link: 12px;
 }
+
+@media (max-width: 740px) {
+	* {
+		--font-size-big: 20px;
+		--line-height-big: 23px;
+
+		--font-size-middle: 16px;
+		--line-height-middle: 18px;
+
+		--font-size-h1: 36px;
+		--line-height-h1: 42px;
+	}
+}
