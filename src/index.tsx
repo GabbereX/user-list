@@ -15,7 +15,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
 	<StrictMode>
-		<BrowserRouter>
+		<BrowserRouter basename='/user-list'>
 			<Provider store={ store }>
 				<Startup />
 			</Provider>
